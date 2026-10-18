@@ -1,3 +1,5 @@
+![Premier League Competitive Balance Dashboard](images/dashboard-preview.png)
+
 # Premier League Competitive Balance Analysis
 
 **An end-to-end sports analytics project using Python, SQL and Tableau | 2010/11–2025/26**
