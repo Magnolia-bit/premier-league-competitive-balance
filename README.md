@@ -1,4 +1,4 @@
-
+![Premier League Competitive Balance Dashboard](images/dashboard-preview.png)
 
 # Premier League Competitive Balance Analysis
 
