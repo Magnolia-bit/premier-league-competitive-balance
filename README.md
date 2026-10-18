@@ -125,6 +125,79 @@ Further research could incorporate club finances, wage expenditure and transfer 
 
 The scripts and workbook document the analytical approach. Reproducing the complete workflow may require downloading the source data and configuring local file paths and database connections.
 
+## How to Reproduce
+
+This repository contains the Python scripts, SQL queries and Tableau workbook used to investigate Premier League competitive balance across 16 seasons (2010/11–2025/26).
+
+### 1. Prerequisites
+
+The analysis uses:
+
+- **Python 3** — data collection, inspection and sensitivity analysis.
+- **MySQL and MySQL Workbench** — data storage, transformation and analytical queries.
+- **Tableau Desktop or Tableau Public Edition** — dashboard visualisation.
+
+The original match data comes from [Football-Data.co.uk](https://www.football-data.co.uk/englandm.php).
+
+### 2. Download the Repository
+
+Clone the repository or download it as a ZIP file.
+
+```bash
+git clone https://github.com/Magnolia-bit/premier-league-competitive-balance.git
+cd premier-league-competitive-balance
+```
+
+### 3. Python — Data Collection and Inspection
+
+Set up a Python environment and install the external libraries imported by the scripts.
+
+The intended execution order is:
+
+```bash
+python python/download_seasons.py
+python python/inspect_seasons.py
+```
+
+The first script retrieves historical Premier League data. The second inspects the downloaded files and supports data quality checks.
+
+Ensure that the scripts' input and output paths match your local directory structure.
+
+### 4. SQL — Data Preparation and Analysis
+
+1. Create a local MySQL database.
+2. Import the prepared Premier League data into the tables referenced by the SQL scripts.
+3. Run the scripts in the `sql/` folder, executing any table-creation and transformation queries before downstream analytical queries.
+4. Execute the validation queries to check the calculated metrics and aggregated results.
+
+The SQL analysis calculates points-per-game measures, classifies teams by performance group and compares historical periods.
+
+### 5. Python — Sensitivity Analysis
+
+Run the sensitivity analysis script once its required input datasets have been prepared.
+
+```bash
+python python/sensitivity_analysis.py
+```
+
+This tests how the analytical conclusions respond to alternative performance-group definitions.
+
+### 6. Tableau — Visualisation
+
+Open the packaged Tableau workbook (`.twbx`) from the `tableau/` folder.
+
+The workbook contains the published dashboard and packaged data extracts. To regenerate the visualisations using newly calculated results, update the relevant Tableau data sources and refresh the extracts.
+
+The completed dashboard can also be viewed online:
+
+[**View Interactive Dashboard**](https://public.tableau.com/app/profile/cameron.sullivan.davis/viz/Premier_League_Competitive_Balance/Dashboard1)
+
+### Reproducibility Notes
+
+The repository documents the principal stages of the analytical process. A complete independent rerun has not yet been verified from a fresh environment.
+
+The exact Python package requirements, database import specifications, script dependencies and local file paths should be confirmed before treating the workflow as fully reproducible.
+
 ## AI-Assisted Development Disclosure
 
 This was an independently directed, AI-assisted analytics project.
