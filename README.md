@@ -127,76 +127,99 @@ The scripts and workbook document the analytical approach. Reproducing the compl
 
 ## How to Reproduce
 
-This repository contains the Python scripts, SQL queries and Tableau workbook used to investigate Premier League competitive balance across 16 seasons (2010/11–2025/26).
+### Prerequisites
 
-### 1. Prerequisites
+- Python 3.10 or newer
+- pandas 2.0 or newer
+- NumPy
+- MySQL and MySQL Workbench for the SQL analysis
+- Tableau Desktop or Tableau Public Edition for viewing the workbook
+- Internet access to download the original match data
 
-The analysis uses:
-
-- **Python 3** — data collection, inspection and sensitivity analysis.
-- **MySQL and MySQL Workbench** — data storage, transformation and analytical queries.
-- **Tableau Desktop or Tableau Public Edition** — dashboard visualisation.
-
-The original match data comes from [Football-Data.co.uk](https://www.football-data.co.uk/englandm.php).
-
-### 2. Download the Repository
-
-Clone the repository or download it as a ZIP file.
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Magnolia-bit/premier-league-competitive-balance.git
 cd premier-league-competitive-balance
 ```
 
-### 3. Python — Data Collection and Inspection
+### 2. Install Python Dependencies
 
-Set up a Python environment and install the external libraries imported by the scripts.
+```bash
+python -m pip install "pandas>=2.0" numpy
+```
 
-The intended execution order is:
+The download script uses Python's standard library. pandas and NumPy are required by the analytical scripts.
+
+### 3. Download the Original Data
 
 ```bash
 python python/download_seasons.py
-python python/inspect_seasons.py
 ```
 
-The first script retrieves historical Premier League data. The second inspects the downloaded files and supports data quality checks.
+Downloads Premier League match results for the 2010/11–2025/26 seasons from Football-Data.co.uk.
 
-Ensure that the scripts' input and output paths match your local directory structure.
+The script saves the original CSV files inside `python/` and generates `source_manifest.csv`, containing source URLs, retrieval timestamps where recorded, and SHA-256 checksums.
 
-### 4. SQL — Data Preparation and Analysis
+Existing source files are not automatically downloaded again.
 
-1. Create a local MySQL database.
-2. Import the prepared Premier League data into the tables referenced by the SQL scripts.
-3. Run the scripts in the `sql/` folder, executing any table-creation and transformation queries before downstream analytical queries.
-4. Execute the validation queries to check the calculated metrics and aggregated results.
+### 4. Inspect and Process the Data
 
-The SQL analysis calculates points-per-game measures, classifies teams by performance group and compares historical periods.
+Optional initial inspection of the 2010/11 season:
 
-### 5. Python — Sensitivity Analysis
+```bash
+python python/inspect_season.py
+```
 
-Run the sensitivity analysis script once its required input datasets have been prepared.
+Run the complete 16-season analysis:
+
+```bash
+python python/analyse_seasons.py
+```
+
+The main analytical script:
+
+- Validates season-level fixtures, results, goal values and match dates.
+- Reconstructs team-level match records and league tables.
+- Calculates points per game, performance-group classifications and opponent-level statistics.
+- Compares the earlier (2010/11–2014/15) and recent (2021/22–2025/26) periods.
+- Exports the analytical datasets to `python/results/`.
+
+### 5. Run Sensitivity Analysis
 
 ```bash
 python python/sensitivity_analysis.py
 ```
 
-This tests how the analytical conclusions respond to alternative performance-group definitions.
+This script reads `python/results/fixtures.csv` and performs five robustness checks:
 
-### 6. Tableau — Visualisation
+1. Alternative top-five/bottom-five and top-four/bottom-four groupings.
+2. League-wide PPG dispersion.
+3. Home-versus-away performance against different opponent groups.
+4. Trend comparisons excluding the 2019/20 and 2020/21 pandemic seasons.
+5. Sensitivity to official points deductions in 2023/24.
 
-Open the packaged Tableau workbook (`.twbx`) from the `tableau/` folder.
+The resulting CSV files are saved to `python/results/`.
 
-The workbook contains the published dashboard and packaged data extracts. To regenerate the visualisations using newly calculated results, update the relevant Tableau data sources and refresh the extracts.
+### 6. SQL Analysis
 
-The completed dashboard can also be viewed online:
+The `sql/` folder contains the queries used for additional analytical calculations and validation in MySQL.
 
-[**View Interactive Dashboard**](https://public.tableau.com/app/profile/cameron.sullivan.davis/viz/Premier_League_Competitive_Balance/Dashboard1)
+To reproduce the SQL stage, create a local MySQL database, import the relevant generated CSV datasets, and execute the queries in their required dependency order.
 
-### Reproducibility Notes
+The exact SQL table definitions and execution sequence still need to be documented and independently tested.
 
-The repository documents the principal stages of the analytical process. A complete independent rerun has not yet been verified from a fresh environment.
+### 7. Tableau Dashboard
 
-The exact Python package requirements, database import specifications, script dependencies and local file paths should be confirmed before treating the workflow as fully reproducible.
+Open the `.twbx` packaged workbook in the `tableau/` folder to view the dashboard with its saved data extracts.
+
+To refresh the dashboard using regenerated analysis results, reconnect the relevant data sources to their corresponding updated outputs and refresh the extracts.
+
+[**View the Published Interactive Dashboard**](https://public.tableau.com/app/profile/cameron.sullivan.davis/viz/Premier_League_Competitive_Balance/Dashboard1)
+
+### Reproducibility Status
+
+The Python execution order, external imports and file dependencies have been reviewed. A complete clean-environment reproduction, including the MySQL and Tableau refresh stages, has not yet been independently verified.
 
 ## AI-Assisted Development Disclosure
 
