@@ -40,7 +40,7 @@ Their PPG against middle-ten opposition fell from 0.992 to 0.822. This contribut
 
 **4. Home advantage against top-five opponents weakened for bottom-five teams.**
 
-Bottom-five home PPG against top-five opponents declined from 0.600 to 0.392, while their away performance changed comparatively little. Heavy home defeats against these opponents also became more frequent.
+Bottom-five home PPG against top-five opponents declined from 0.600 to 0.392, while their away performance changed comparatively little.
 
 **5. Alternative team groupings supported the wider conclusion.**
 
