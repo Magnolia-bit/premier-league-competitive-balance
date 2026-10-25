@@ -82,7 +82,7 @@ The dashboard combines trend analysis, performance-group comparisons, opponent-l
 - Earlier: 2010/11–2014/15
 - Recent: 2021/22–2025/26
 
-**Performance groups:** Teams were classified using their final league positions in each season:
+**Performance groups:** Teams were ranked within each season by match-earned points, then goal difference and goals scored, before being divided into performance groups.:
 - Top five: positions 1–5
 - Middle ten: positions 6–15
 - Bottom five: positions 16–20
@@ -221,15 +221,11 @@ To refresh the dashboard using regenerated analysis results, reconnect the relev
 
 The Python execution order, external imports and file dependencies have been reviewed. A complete clean-environment reproduction, including the MySQL and Tableau refresh stages, has not yet been independently verified.
 
-## AI-Assisted Development Disclosure
+## Project Ownership and AI Assistance
 
-This was an independently directed, AI-assisted analytics project.
+I directed this project, from defining the research questions and assessing the methodology to testing the code, cross-checking results in Python and SQL, interpreting the findings and building the final Tableau dashboard.
 
-ChatGPT provided substantial assistance with code generation, debugging, technical guidance, Tableau development and analytical review.
-
-I directed the research questions, selected and assessed the methodology, executed and tested the code, cross-validated results using Python and SQL, interpreted the findings and developed the final Tableau visualisations.
-
-AI assistance was used to accelerate implementation and support learning, with analytical outputs subject to review and validation.
+I used ChatGPT to support code generation, debugging, technical guidance, dashboard development and analytical review, and to help draft the README and methodology documentation. I reviewed the outputs and took responsibility for the final analysis and conclusions.
 
 ## Project Outcome
 
