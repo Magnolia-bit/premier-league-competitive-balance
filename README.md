@@ -219,7 +219,9 @@ To refresh the dashboard using regenerated analysis results, reconnect the relev
 
 ### Reproducibility Status
 
-The Python execution order, external imports and file dependencies have been reviewed. A complete clean-environment reproduction, including the MySQL and Tableau refresh stages, has not yet been independently verified.
+The main Python analysis and sensitivity scripts were successfully run against the saved source data for all 16 seasons. All source validation checks passed, and the headline results matched those reported in this README.
+
+A complete clean-environment reproduction, including the MySQL analysis and Tableau data refresh, has not yet been independently verified
 
 ## Project Ownership and AI Assistance
 
